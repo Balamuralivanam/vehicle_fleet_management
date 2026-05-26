@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FleetVision Pro - Vehicle Fleet Management & Photography</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --accent: #ff6b35;
+            --accent-light: #ff8c61;
+            --text-light: #e8eaf6;
+            --text-dark: #1a1a2e;
+            --bg-light: #f5f7fa;
+            --border: #2a2f4a;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a1f3a 100%);
+            color: var(--text-light);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            color: var(--text-light);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 6rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, #1a1f3a 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            line-height: 0.95;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            color: rgba(232, 234, 246, 0.85);
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 700px;
+        }
+
+        /* Fleet Management Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--accent);
+            opacity: 0.05;
+            border-radius: 0 15px 0 100%;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            width: 150px;
+            height: 150px;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Fleet Management Process */
+        .process-section {
+            background: linear-gradient(135deg, #f8f9fc 0%, #e8eaf6 100%);
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        .process-step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .process-step p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Photography Services */
+        .photography-section {
+            background: white;
+        }
+
+        .photo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .photo-feature {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a1f3a 100%);
+            color: var(--text-light);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-feature::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
+        }
+
+        .photo-feature:hover::before {
+            top: -30%;
+            right: -30%;
+        }
+
+        .photo-feature:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 5px 15px rgba(255, 107, 53, 0.3));
+        }
+
+        .photo-feature h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .photo-feature p {
+            color: rgba(232, 234, 246, 0.85);
+            line-height: 1.7;
+        }
+
+        /* Why Choose Us */
+        .why-choose-section {
+            background: var(--primary);
+            color: var(--text-light);
+        }
+
+        .why-choose-section .section-title {
+            color: var(--text-light);
+        }
+
+        .why-choose-section .section-subtitle {
+            color: rgba(232, 234, 246, 0.75);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            background: rgba(255, 107, 53, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .benefit-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .benefit-item p {
+            color: rgba(232, 234, 246, 0.85);
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            text-align: center;
+            padding: 6rem 5%;
+        }
+
+        .cta-section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-primary {
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-secondary {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(232, 234, 246, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Fleet<span>Vision</span> PRO</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#photography">Photography</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Complete <span>Fleet Management</span> & Vehicle Photography</h1>
+                <p>Professional fleet tracking, maintenance, and documentation services combined with stunning vehicle photography. We ensure every vehicle in your fleet is monitored, maintained, and beautifully showcased.</p>
+                <a href="#contact" class="cta-button">Get Started Today</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Fleet Management Services -->
+    <section id="services">
+        <h2 class="section-title">Fleet Management Services</h2>
+        <p class="section-subtitle">Comprehensive vehicle fleet solutions tailored to your business needs</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">🚗</span>
+                <h3>Real-Time Fleet Tracking</h3>
+                <p>Monitor every vehicle's location, route, and destination in real-time. Know exactly where your fleet is at any given moment, whether on rental, contract, or company assignments.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">📋</span>
+                <h3>Complete Documentation</h3>
+                <p>Full trip documentation including pre-trip and post-trip photography, mileage records, fuel consumption, and condition reports. Every journey is thoroughly documented for your records.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">🔧</span>
+                <h3>Maintenance Scheduling</h3>
+                <p>Automated maintenance reminders and scheduling based on mileage, time, and usage patterns. Keep your fleet in optimal condition with proactive maintenance management.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">📊</span>
+                <h3>Usage Analytics</h3>
+                <p>Detailed reports on vehicle utilization, rental periods, contract assignments, and company usage. Make data-driven decisions to optimize your fleet performance.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">🤝</span>
+                <h3>Contract & Rental Management</h3>
+                <p>Track vehicles assigned to rentals, corporate contracts, or third-party companies. Manage agreements, billing cycles, and return schedules all in one place.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-icon">🛡️</span>
+                <h3>Damage Prevention & Claims</h3>
+                <p>Pre and post-trip photography ensures accountability and simplifies insurance claims. Document vehicle condition at every stage to protect your assets.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Management Process -->
+    <section id="process" class="process-section">
+        <h2 class="section-title">Our Process</h2>
+        <p class="section-subtitle">How we manage your fleet from start to finish</p>
+
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Vehicle Intake</h3>
+                <p>Complete photography and documentation when vehicles join your fleet. Capture every detail of the vehicle's initial condition.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Assignment Tracking</h3>
+                <p>Log destination details - rental customers, contract companies, or internal departments. Track every assignment with full documentation.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Journey Monitoring</h3>
+                <p>Real-time GPS tracking and route monitoring throughout the entire trip. Know where each vehicle is and where it's headed.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>Post-Trip Documentation</h3>
+                <p>Comprehensive photography and condition assessment after each trip. Compare with pre-trip images to identify any changes.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">5</div>
+                <h3>Reporting & Analysis</h3>
+                <p>Detailed reports on usage, performance, and maintenance needs. Continuous optimization of your fleet operations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photography Services -->
+    <section id="photography" class="photography-section">
+        <h2 class="section-title">Professional Vehicle Photography</h2>
+        <p class="section-subtitle">Showcase your fleet with stunning, high-quality vehicle photography</p>
+
+        <div class="photo-features">
+            <div class="photo-feature">
+                <div class="photo-icon">📸</div>
+                <h3>Pre-Trip Documentation</h3>
+                <p>Detailed exterior and interior shots before every assignment. Capture the vehicle's condition from multiple angles for complete documentation.</p>
+            </div>
+
+            <div class="photo-feature">
+                <div class="photo-icon">🎯</div>
+                <h3>Post-Trip Verification</h3>
+                <p>Thorough photography after each trip to document vehicle condition. Essential for damage assessment and accountability.</p>
+            </div>
+
+            <div class="photo-feature">
+                <div class="photo-icon">✨</div>
+                <h3>Marketing Photography</h3>
+                <p>Professional-grade photos for your website, listings, and promotional materials. Make your fleet stand out with exceptional imagery.</p>
+            </div>
+
+            <div class="photo-feature">
+                <div class="photo-icon">🔍</div>
+                <h3>Damage Documentation</h3>
+                <p>Detailed close-up photography of any wear, damage, or maintenance needs. Clear evidence for insurance and repair purposes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-section">
+        <h2 class="section-title">Why Choose FleetVision Pro</h2>
+        <p class="section-subtitle">The complete solution for modern fleet management</p>
+
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <h3>✓ Complete Visibility</h3>
+                <p>Track every vehicle in your fleet with real-time GPS and comprehensive documentation at every stage.</p>
+            </div>
+
+            <div class="benefit-item">
+                <h3>✓ Professional Documentation</h3>
+                <p>High-quality photography and detailed records for every trip, rental, and contract assignment.</p>
+            </div>
+
+            <div class="benefit-item">
+                <h3>✓ Simplified Management</h3>
+                <p>One platform for all your fleet needs - tracking, photography, maintenance, and reporting.</p>
+            </div>
+
+            <div class="benefit-item">
+                <h3>✓ Asset Protection</h3>
+                <p>Protect your investment with detailed pre and post-trip documentation for accountability.</p>
+            </div>
+
+            <div class="benefit-item">
+                <h3>✓ Data-Driven Insights</h3>
+                <p>Make informed decisions with comprehensive analytics on usage, costs, and performance.</p>
+            </div>
+
+            <div class="benefit-item">
+                <h3>✓ Scalable Solution</h3>
+                <p>Whether you manage 5 vehicles or 500, our system grows with your business needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="contact" class="cta-section">
+        <h2>Ready to Transform Your Fleet Management?</h2>
+        <p>Join leading companies that trust FleetVision Pro for their vehicle fleet management and documentation needs.</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-primary">Request a Demo</a>
+            <a href="#" class="cta-secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 FleetVision Pro. All rights reserved. | Professional Fleet Management & Vehicle Photography Services</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards and process steps
+        document.querySelectorAll('.service-card, .process-step, .photo-feature, .benefit-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
